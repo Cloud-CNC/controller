@@ -13,17 +13,18 @@ const websocket = require('./lib/websocket.js');
 process.env.NODE_TLS_REJECT_UNAUTHORIZED = 0;
 
 //Serial controller (Only for enabled machines)
-const serialController = new serial(config.machines.filter(machine => machine.enabled));
+const serialController = new serial(config.machines.filter(machine => machine.enabled), logger);
 
 //Websocket controller
-const websocketController = new websocket(config.core.url, config.crypto.key, logger);
+const websocketController = new websocket(config.core.url, config.crypto.key, config.meta.delay, logger);
 websocketController.on('open', () =>
 {
   websocketController.bind(config.meta._id, package.version);
 });
 
 //Connect websocket to serial controller
-websocketController.on('command', command =>
+websocketController.on('command', data =>
 {
-  serialController.send(command.machine, command.data);
+  console.log(`Received command: ${data.command} destined to: ${data.machine}`);
+  //serialController.send(data.machine, data.command);
 });

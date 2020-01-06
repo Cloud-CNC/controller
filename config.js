@@ -25,7 +25,7 @@ module.exports = {
   //Connected machines
   machines: [
     {
-      _id: '5e0fd5bdb504f517e885e828',
+      _id: '5e124b6036767727a837676d',
       enabled: false,
       path: 'COM3'
     }
@@ -33,6 +33,9 @@ module.exports = {
   //Meta information
   meta: {
     //Controller ID
-    _id: '5e0fd554b504f517e885e827'
+    _id: '5e124af936767727a837676c',
+
+    //Auto-reconnect delay (ms)
+    timeout: 3000
   }
 };

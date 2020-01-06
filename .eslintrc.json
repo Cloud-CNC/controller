@@ -18,10 +18,6 @@
 			}
 		],
 		"curly": "warn",
-		"func-style": [
-			"error",
-			"declaration"
-		],
 		"no-var": "error",
 		"no-extra-semi": "error",
 		"object-curly-spacing": "warn",
