@@ -13,6 +13,7 @@
     "eslint": "^6.8.0"
   },
   "scripts": {
+    "lab": "node lab.js",
     "start": "node index.js",
     "test": "eslint ."
   },
