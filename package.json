@@ -1,6 +1,6 @@
 {
   "name": "@cloud-cnc/controller",
-  "version": "0.0.1",
+  "version": "0.5.0",
   "description": "Controller for Cloud CNC",
   "main": "index.js",
   "dependencies": {
@@ -13,6 +13,7 @@
     "eslint": "^6.8.0"
   },
   "scripts": {
+    "lab": "node lab.js",
     "start": "node index.js",
     "test": "eslint ."
   },

@@ -4,8 +4,8 @@
 
 //Imports
 const config = require('./config.js');
+const fs = require('fs');
 const logger = require('./lib/logger.js');
-const package = require('./package.json');
 const serial = require('./lib/serial.js');
 const websocket = require('./lib/websocket.js');
 
@@ -13,17 +13,32 @@ const websocket = require('./lib/websocket.js');
 process.env.NODE_TLS_REJECT_UNAUTHORIZED = 0;
 
 //Serial controller (Only for enabled machines)
-const serialController = new serial(config.machines.filter(machine => machine.enabled));
+const serialController = new serial(config.machines.filter(machine => machine.enabled), config.controller.serialDelay, logger);
 
 //Websocket controller
-const websocketController = new websocket(config.core.url, config.crypto.key, logger);
-websocketController.on('open', () =>
+const websocketController = new websocket(config.core.url, config.controller._id, fs.readFileSync(config.controller.key, 'utf8'), config.controller.websocketDelay, logger);
+
+//Command event
+websocketController.on('command', (data, response) =>
 {
-  websocketController.bind(config.meta._id, package.version);
+  //Send
+  serialController.send(data.machine, data.command).then(res =>
+  {
+    //Response
+    response(res);
+  });
 });
 
-//Connect websocket to serial controller
-websocketController.on('command', command =>
+//Execute event
+websocketController.on('execute', (data, success) =>
 {
-  serialController.send(command.machine, command.data);
+  //Add M28 + M29 (SD Card Commands)
+  data.file = `M28\n${data.file}M29\n`;
+
+  //Send
+  serialController.send(data.machine, data.file).then(res =>
+  {    
+    //Response
+    success(/echo:Now fresh file/.test(res));
+  });
 });
