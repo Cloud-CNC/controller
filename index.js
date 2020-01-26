@@ -12,13 +12,13 @@ const websocket = require('./lib/websocket.js');
 //Allow self-signed certificates
 process.env.NODE_TLS_REJECT_UNAUTHORIZED = 0;
 
-//Serial controller (Only for enabled machines)
-const serialController = new serial(config.machines.filter(machine => machine.enabled), config.controller.serialDelay, logger);
+//Serial controller
+const serialController = new serial(config.machines, config.controller.serialDelay, config.controller.maximumSerialAttempts, logger);
 
 //Websocket controller
-const websocketController = new websocket(config.core.url, config.controller._id, fs.readFileSync(config.controller.key, 'utf8'), config.controller.websocketDelay, logger);
+const websocketController = new websocket(config.core.url, config.controller._id, fs.readFileSync(config.controller.key, 'utf8'), config.controller.websocketDelay, config.controller.maximumWebsocketAttempts, logger);
 
-//Command event
+//Command
 websocketController.on('command', (data, response) =>
 {
   //Send
@@ -29,7 +29,7 @@ websocketController.on('command', (data, response) =>
   });
 });
 
-//Execute event
+//Execute
 websocketController.on('execute', (data, success) =>
 {
   //Add M28 + M29 (SD Card Commands)
@@ -37,8 +37,27 @@ websocketController.on('execute', (data, success) =>
 
   //Send
   serialController.send(data.machine, data.file).then(res =>
-  {    
+  {
     //Response
     success(/echo:Now fresh file/.test(res));
   });
 });
+
+//Core disconnect
+websocketController.on('disconnect', () =>
+{
+  if (config.controller.failsafe)
+  {
+    //Run failsafe command
+    config.machines.forEach(machine =>
+    {
+      serialController.send(machine._id, machine.failsafe);
+    });
+  }
+});
+
+//Machine disconnect
+/*serialController.on('disconnect', machine =>
+{
+
+});*/
