@@ -7,10 +7,10 @@ jobs:
     steps:
       - uses: actions/checkout@master
       - uses: actions/setup-node@v1
+      - name: Configure Python
+        run: npm config set python python2.7
       - name: Install Modules
         run: npm ci
-      - name: Debug
-        run: which nodejs
       - name: Create Directories
         run: mkdir crypto files && sudo mkdir /data/db -p
       - name: Generate Key
