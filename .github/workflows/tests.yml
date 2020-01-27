@@ -8,9 +8,7 @@ jobs:
       - uses: actions/checkout@master
       - uses: actions/setup-node@v1
       - name: Install Modules
-        run: npm ci
-      - name: Rebuild Modules
-        run: npm rebuild --update-binary
+        run: npm i
       - name: Create Directories
         run: mkdir crypto files && sudo mkdir /data/db -p
       - name: Generate Key
