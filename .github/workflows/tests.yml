@@ -10,7 +10,7 @@ jobs:
       - name: Install Modules
         run: npm ci
       - name: Rebuild Modules
-        run: npm rebuild
+        run: npm rebuild --update-binary
       - name: Create Directories
         run: mkdir crypto files && sudo mkdir /data/db -p
       - name: Generate Key
