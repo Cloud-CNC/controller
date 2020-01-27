@@ -1,0 +1,17 @@
+name: tests
+on: push
+jobs:
+  build:
+    name: Run Tests
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@master
+      - uses: actions/setup-node@v1
+      - name: Install Modules
+        run: npm ci
+      - name: Create Directories
+        run: mkdir crypto files && sudo mkdir /data/db -p
+      - name: Generate Key
+        run: cd crypto && openssl rand -out key.txt -base64 512
+      - name: Test
+        run: sudo npm test

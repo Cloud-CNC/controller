@@ -1,7 +1,8 @@
 # Controller
 ![status](https://img.shields.io/badge/status-under%20development-yellow)
-[![issues](https://img.shields.io/github/issues/Cloud-CNC/controller)](https://github.com/Cloud-CNC/core/issues)
-[![last commit](https://img.shields.io/github/last-commit/Cloud-CNC/controller)](https://github.com/Cloud-CNC/core/commits/master)
+[![tests](https://img.shields.io/github/workflow/status/Cloud-CNC/controller/tests)](https://github.com/Cloud-CNC/controller/actions)
+[![issues](https://img.shields.io/github/issues/Cloud-CNC/controller)](https://github.com/Cloud-CNC/controller/issues)
+[![last commit](https://img.shields.io/github/last-commit/Cloud-CNC/controller)](https://github.com/Cloud-CNC/controller/commits/master)
 
 This repository contains all files for running a controller. Controller(s) are typically ran on computers with close proximity to the CNC machines.
 
