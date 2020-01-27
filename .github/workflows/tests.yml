@@ -10,7 +10,7 @@ jobs:
       - name: Install Modules
         run: npm ci
       - name: Rebuild Serialport
-        run: node-pre-gyp rebuild
+        run: node-gyp rebuild
       - name: Create Directories
         run: mkdir crypto files && sudo mkdir /data/db -p
       - name: Generate Key
