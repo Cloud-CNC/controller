@@ -9,8 +9,8 @@ jobs:
       - uses: actions/setup-node@v1
       - name: Install Modules
         run: npm ci
-      - name: Rebuild Serialport
-        run: node-gyp rebuild
+      - name: Debug
+        run: which node && which nodejs
       - name: Create Directories
         run: mkdir crypto files && sudo mkdir /data/db -p
       - name: Generate Key
