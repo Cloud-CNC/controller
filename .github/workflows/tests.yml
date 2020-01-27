@@ -10,7 +10,7 @@ jobs:
       - name: Install Modules
         run: npm ci
       - name: Debug
-        run: which node && which nodejs
+        run: which nodejs
       - name: Create Directories
         run: mkdir crypto files && sudo mkdir /data/db -p
       - name: Generate Key
