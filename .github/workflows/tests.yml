@@ -8,7 +8,9 @@ jobs:
       - uses: actions/checkout@master
       - uses: actions/setup-node@v1
       - name: Install Modules
-        run: npm i
+        run: npm ci
+      - name: Rebuild Serialport
+        run: node-pre-gyp rebuild
       - name: Create Directories
         run: mkdir crypto files && sudo mkdir /data/db -p
       - name: Generate Key
