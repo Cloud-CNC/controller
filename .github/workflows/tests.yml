@@ -10,7 +10,7 @@ jobs:
         with:
           node-version: '12.x'
       - name: Install Modules
-        run: npm i -D
+        run: npm ci
       - name: Create Directories
         run: mkdir crypto files && sudo mkdir /data/db -p
       - name: Generate Key

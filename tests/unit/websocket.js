@@ -76,24 +76,28 @@ module.exports = () =>
       });
     });
 
-    //Reconnect
+    //Confirm reconnect
     controller.once('open', () =>
     {
       done();
     });
     
+    //Disconnect
     server.close();
   });
 
-  it('should emit disconnect', done =>
+  it('should emit disconnect event', done =>
   {
-    server.close();
-
+    //Handle error
     controller.on('error', () => null);
 
+    //Confirm disconnect
     controller.once('disconnect', () =>
     {
       done();
     });
+
+    //Disconnect
+    server.close();
   });
 };
