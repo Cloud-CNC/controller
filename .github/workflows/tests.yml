@@ -10,11 +10,9 @@ jobs:
         with:
           node-version: '12.x'
       - name: Install Modules
-        run: npm ci
+        run: npm i -D
       - name: Rebuild
-        run: npm rebuild
-      - name: Reinstall
-        run: npm i
+        run: npx node-gyp rebuild
       - name: Create Directories
         run: mkdir crypto files && sudo mkdir /data/db -p
       - name: Generate Key
