@@ -5,8 +5,10 @@ jobs:
     name: Run Tests
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@master
+      - uses: actions/checkout@v2.0.0
       - uses: actions/setup-node@v1.1.0
+        with:
+          node-version: '12.x'
       - name: Install Modules
         run: npm ci
       - name: Rebuild
