@@ -12,7 +12,7 @@ const ws = require('ws');
 let server = new ws.Server({
   port: 80
 });
-server.on('connection', temp => socket = temp);
+server.once('connection', temp => socket = temp);
 
 //Data
 let controller;
