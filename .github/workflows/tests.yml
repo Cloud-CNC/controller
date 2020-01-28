@@ -11,8 +11,10 @@ jobs:
           node-version: '12.x'
       - name: Install Modules
         run: npm i -D
-      - name: Rebuild
-        run: npm rebuild
+      - name: Debug 1
+        run: node --version
+      - name: Debug 2
+        run: nodejs --version
       - name: Create Directories
         run: mkdir crypto files && sudo mkdir /data/db -p
       - name: Generate Key
