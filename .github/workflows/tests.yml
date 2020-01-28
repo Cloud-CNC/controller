@@ -12,7 +12,7 @@ jobs:
       - name: Install Modules
         run: npm i -D
       - name: Rebuild
-        run: npx node-gyp rebuild
+        run: npm rebuild
       - name: Create Directories
         run: mkdir crypto files && sudo mkdir /data/db -p
       - name: Generate Key
