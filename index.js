@@ -9,9 +9,6 @@ const logger = require('./lib/logger.js');
 const serial = require('./lib/serial.js');
 const websocket = require('./lib/websocket.js');
 
-//Allow self-signed certificates
-process.env.NODE_TLS_REJECT_UNAUTHORIZED = 0;
-
 //Serial controller
 const serialController = new serial(config.machines, config.controller.serialDelay, config.controller.maximumSerialAttempts, logger);
 

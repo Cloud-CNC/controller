@@ -2,15 +2,18 @@ name: tests
 on: push
 jobs:
   build:
-    name: Run Tests
+    name: Test with Node ${{ matrix.node }}
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node: [10, 12, 13]
     steps:
       - uses: actions/checkout@v2.0.0
       - uses: actions/setup-node@v1
         with:
-          node-version: '12.x'
+          node-version: ${{ matrix.node }}
       - name: Install Modules
-        run: npm ci
+        run: sudo npm ci
       - name: Create Directories
         run: mkdir crypto files && sudo mkdir /data/db -p
       - name: Generate Key
