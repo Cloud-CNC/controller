@@ -8,8 +8,6 @@ jobs:
       matrix:
         node: [12, 13]
     steps:
-      - name: Cleanup
-        run: sudo rm node_modules
       - uses: actions/checkout@v2.0.0
       - uses: actions/setup-node@v1
         with:
