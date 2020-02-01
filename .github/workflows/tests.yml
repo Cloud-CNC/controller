@@ -14,6 +14,8 @@ jobs:
           node-version: ${{ matrix.node }}
       - uses: stefanoeb/eslint-action@1.0.2
         name: ESLint
+      - name: Cleanup
+        run: sudo rm -rf node_modules
       - name: Install Modules
         run: sudo npm ci
       - name: Create Directories
