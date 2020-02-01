@@ -16,6 +16,8 @@ jobs:
         name: ESLint
       - name: Install Modules
         run: sudo npm ci
+      - name: Cleanup
+        run: sudo rm -rf /home/runner/work/controller/controller/node_modules
       - name: Create Directories
         run: mkdir crypto files && sudo mkdir /data/db -p
       - name: Generate Key
