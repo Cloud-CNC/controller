@@ -13,9 +13,11 @@
     "@serialport/binding-mock": "^8.0.6",
     "chai": "^4.2.0",
     "eslint": "^6.8.0",
-    "mocha": "^7.0.1"
+    "mocha": "^7.0.1",
+    "nyc": "^15.0.0"
   },
   "scripts": {
+    "coverage": "nyc --reporter=lcov npm test",
     "start": "node index.js",
     "test": "mocha --colors --exit --timeout 60000 ./tests/index.js"
   },
