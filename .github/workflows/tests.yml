@@ -14,10 +14,10 @@ jobs:
           node-version: ${{ matrix.node }}
       - uses: stefanoeb/eslint-action@1.0.2
         name: ESLint
-      - name: Install Modules
-        run: sudo npm ci
       - name: Cleanup
         run: sudo rm -rf /home/runner/work/controller/controller/node_modules
+      - name: Install Modules
+        run: sudo npm ci
       - name: Create Directories
         run: mkdir crypto files && sudo mkdir /data/db -p
       - name: Generate Key
