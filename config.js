@@ -2,8 +2,6 @@
  * @fileoverview Cloud CNC Controller Config
  */
 
-//Import
-const fs = require('fs');
 
 //Export
 module.exports = {
