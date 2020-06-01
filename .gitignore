@@ -1,8 +1,10 @@
 # VS Code Counter
 .VSCodeCounter
 
-# Cryptography related files
-crypto
+# Config files
+config/*
+!config/default.js
+!config/development.js
 
 # Logs
 logs

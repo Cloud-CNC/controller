@@ -3,17 +3,25 @@
  */
 
 //Imports
-const config = require('./config.js');
+const config = require('config');
 const fs = require('fs');
-const logger = require('./lib/logger.js');
-const serial = require('./lib/serial.js');
-const websocket = require('./lib/websocket.js');
+const logger = require('./lib/logger');
+const serial = require('./lib/serial');
+const websocket = require('./lib/websocket');
 
 //Serial controller
-const serialController = new serial(config.machines, config.controller.serialDelay, config.controller.maximumSerialAttempts, logger);
+const serialController = new serial(config.get('machines'),
+  config.get('controller.serialDelay'),
+  config.get('controller.maximumSerialAttempts'),
+  logger);
 
 //Websocket controller
-const websocketController = new websocket(config.core.url, config.controller._id, fs.readFileSync(config.controller.key, 'utf8'), config.controller.websocketDelay, config.controller.maximumWebsocketAttempts, logger);
+const websocketController = new websocket(config.get('core.url'),
+  config.get('controller._id'),
+  fs.readFileSync(config.get('controller.key'), 'utf8'),
+  config.get('controller.websocketDelay'),
+  config.get('controller.maximumWebsocketAttempts'),
+  logger);
 
 //Command
 websocketController.on('command', (data, response) =>

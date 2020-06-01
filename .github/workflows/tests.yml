@@ -8,11 +8,11 @@ jobs:
       matrix:
         node: [12, 13]
     steps:
-      - uses: actions/checkout@v2.0.0
-      - uses: actions/setup-node@v1
+      - uses: actions/checkout@master
+      - uses: actions/setup-node@master
         with:
           node-version: ${{ matrix.node }}
-      - uses: stefanoeb/eslint-action@1.0.2
+      - uses: stefanoeb/eslint-action@master
         name: ESLint
       - name: Cleanup
         run: sudo rm -rf node_modules
@@ -22,7 +22,7 @@ jobs:
         run: mkdir crypto files && sudo mkdir /data/db -p
       - name: Generate Key
         run: cd crypto && openssl rand -out key.txt -base64 512
-      - uses: paambaati/codeclimate-action@v2.4.0
+      - uses: paambaati/codeclimate-action@master
         name: Test
         env:
           CC_TEST_REPORTER_ID: ${{ secrets.CODE_CLIMATE_REPORTER_ID }}

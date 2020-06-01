@@ -14,31 +14,25 @@
         "--exit",
         "--timeout",
         "60000",
-        "${workspaceFolder}/tests/index.js"
+        "${workspaceFolder}/tests/index"
       ],
       "internalConsoleOptions": "openOnSessionStart",
       "skipFiles": [
         "<node_internals>/**"
       ]
     },
-    
     {
       "type": "node",
       "request": "launch",
       "name": "Controller",
-      "program": "${workspaceFolder}/index.js",
+      "program": "${workspaceFolder}/index",
       "skipFiles": [
         "<node_internals>/**"
-      ]
-    },
-    {
-      "type": "node",
-      "request": "launch",
-      "name": "Lab",
-      "program": "${workspaceFolder}/lab.js",
-      "skipFiles": [
-        "<node_internals>/**"
-      ]
+      ],
+      "env": {
+        "NODE_ENV": "development"
+      },
+      "outputCapture": "std"
     }
   ]
 }
