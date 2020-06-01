@@ -22,8 +22,8 @@ jobs:
         run: sudo mkdir /data/db -p
       - name: Generate Key
         run: cd config && openssl rand -out key.txt -base64 512
-      - uses: paambaati/codeclimate-action@master
-        name: Test
+      - uses: paambaati/codeclimate-action@v2.6.0
+        name: Run Tests
         env:
           CC_TEST_REPORTER_ID: ${{ secrets.CODE_CLIMATE_REPORTER_ID }}
         with:
