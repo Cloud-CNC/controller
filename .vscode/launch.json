@@ -7,6 +7,33 @@
     {
       "type": "node",
       "request": "launch",
+      "name": "Start (Development)",
+      "program": "${workspaceFolder}/index",
+      "skipFiles": [
+        "<node_internals>/**"
+      ],
+      "env": {
+        "NODE_ENV": "development",
+      },
+      "outputCapture": "std"
+    },
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "Start (E2E)",
+      "program": "${workspaceFolder}/index",
+      "skipFiles": [
+        "<node_internals>/**"
+      ],
+      "env": {
+        "NODE_ENV": "e2e",
+        "NODE_CONFIG": "{\"machines\":[{\"_id\":\"5edc08f013d44b3f39f43ab0\",\"failsafe\":\"M112\\n\",\"path\":\"test-machine\",\"baudRate\":250000}]}"
+      },
+      "outputCapture": "std"
+    },
+    {
+      "type": "node",
+      "request": "launch",
       "name": "Tests",
       "program": "${workspaceFolder}/node_modules/mocha/bin/_mocha",
       "args": [
@@ -20,19 +47,6 @@
       "skipFiles": [
         "<node_internals>/**"
       ]
-    },
-    {
-      "type": "node",
-      "request": "launch",
-      "name": "Controller",
-      "program": "${workspaceFolder}/index",
-      "skipFiles": [
-        "<node_internals>/**"
-      ],
-      "env": {
-        "NODE_ENV": "development"
-      },
-      "outputCapture": "std"
     }
   ]
 }

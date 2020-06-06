@@ -1,5 +1,5 @@
 /**
- * @fileoverview Default production Cloud CNC controller Config
+ * @fileoverview Default development Cloud CNC controller config
  * This config file uses sain defaults
  */
 
@@ -31,7 +31,13 @@ module.exports = {
     failsafe: true
   },
   core: {
-    //Websocket URL of core server
+    //TLS certificate (Used for trusting self signed certificates) (PEM encoded)
+    cert: './config/cert.cer',
+
+    //Self signed (Trust self signed certificates installed on the core server)
+    selfSigned: true,
+
+    //Websocket URL of core server (With URI scheme)
     url: 'wss://127.0.0.1'
   },
   //List of machines this controller should control
@@ -39,8 +45,8 @@ module.exports = {
     {
       _id: '',
       failsafe: 'M112\n',
-      path: 'COM3',
-      baudRate: 250000
+      path: '',
+      baudRate: 0
     }
   ]
 };

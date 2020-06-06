@@ -23,8 +23,7 @@ module.exports = () =>
 {
   it('should connect to machine', done =>
   {
-    //Mock binding
-    require('serialport').Binding = mockBinding;
+    //Create mock serial port
     mockBinding.createPort('COM0', {echo: true});
 
     //New controller
