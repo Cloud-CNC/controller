@@ -10,18 +10,49 @@ const serial = require('./lib/serial');
 const websocket = require('./lib/websocket');
 
 //Serial controller
-const serialController = new serial(config.get('machines'),
-  config.get('controller.serialDelay'),
-  config.get('controller.maximumSerialAttempts'),
-  logger);
+let serialController;
+if (process.env.E2E == 'true')
+{
+  serialController = new serial([
+    {
+      _id: process.env.MACHINE_ID,
+      failsafe: 'M112\n',
+      path: 'test-machine',
+      baudRate: 0
+    }
+  ],
+    config.get('controller.serialDelay'),
+    config.get('controller.maximumSerialAttempts'),
+    logger);
+}
+else
+{
+  serialController = new serial(config.get('machines'),
+    config.get('controller.serialDelay'),
+    config.get('controller.maximumSerialAttempts'),
+    logger);
+}
 
 //Websocket controller
-const websocketController = new websocket(config.get('core.url'),
-  config.get('controller._id'),
-  fs.readFileSync(config.get('controller.key'), 'utf8'),
-  config.get('controller.websocketDelay'),
-  config.get('controller.maximumWebsocketAttempts'),
-  logger);
+let websocketController;
+if (process.env.E2E == 'true')
+{
+  websocketController = new websocket(config.get('core.url'),
+    process.env.CONTROLLER_ID,
+    process.env.CONTROLLER_KEY,
+    config.get('controller.websocketDelay'),
+    config.get('controller.maximumWebsocketAttempts'),
+    logger);
+}
+else
+{
+  websocketController = new websocket(config.get('core.url'),
+    config.get('controller._id'),
+    fs.readFileSync(config.get('controller.key'), 'utf8'),
+    config.get('controller.websocketDelay'),
+    config.get('controller.maximumWebsocketAttempts'),
+    logger);
+}
 
 //Command
 websocketController.on('command', (data, response) =>
@@ -35,7 +66,7 @@ websocketController.on('command', (data, response) =>
 });
 
 //Execute
-websocketController.on('execute', (data, success) =>
+websocketController.on('execute', (data, response) =>
 {
   //Add M28 + M29 (SD Card Commands)
   data.file = `M28\n${data.file}M29\n`;
@@ -44,7 +75,7 @@ websocketController.on('execute', (data, success) =>
   serialController.send(data.machine, data.file).then(res =>
   {
     //Response
-    success(/echo:Now fresh file/.test(res));
+    response(/echo:Now fresh file/.test(res));
   });
 });
 

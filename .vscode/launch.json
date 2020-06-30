@@ -5,31 +5,30 @@
   "version": "0.2.0",
   "configurations": [
     {
-      "type": "node",
-      "request": "launch",
       "name": "Start (Development)",
-      "program": "${workspaceFolder}/index",
+      "request": "launch",
+      "runtimeArgs": [
+        "run-script",
+        "debug"
+      ],
+      "runtimeExecutable": "npm",
       "skipFiles": [
         "<node_internals>/**"
       ],
-      "env": {
-        "NODE_ENV": "development",
-      },
-      "outputCapture": "std"
+      "type": "pwa-node"
     },
     {
-      "type": "node",
-      "request": "launch",
       "name": "Start (E2E)",
-      "program": "${workspaceFolder}/index",
+      "request": "launch",
+      "runtimeArgs": [
+        "run-script",
+        "start:e2e"
+      ],
+      "runtimeExecutable": "npm",
       "skipFiles": [
         "<node_internals>/**"
       ],
-      "env": {
-        "NODE_ENV": "e2e",
-        "NODE_CONFIG": "{\"machines\":[{\"_id\":\"5edc08f013d44b3f39f43ab0\",\"failsafe\":\"M112\\n\",\"path\":\"test-machine\",\"baudRate\":250000}]}"
-      },
-      "outputCapture": "std"
+      "type": "pwa-node"
     },
     {
       "type": "node",

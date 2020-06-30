@@ -24,9 +24,9 @@
   },
   "scripts": {
     "coverage": "nyc --reporter=lcov npm test",
-    "start:development": "cross-env NODE_ENV=development node index",
-    "start": "cross-env NODE_ENV=production node index",
-    "start:e2e": "cross-env NODE_ENV=e2e NODE_CONFIG=\"{\\\"machines\\\":[{\\\"_id\\\":\\\"5edc08f013d44b3f39f43ab0\\\",\\\"failsafe\\\":\\\"M112\\\\n\\\",\\\"path\\\":\\\"test-machine\\\",\\\"baudRate\\\":250000}]}\" node index",
+    "start": "cross-env NODE_ENV=production E2E=false node index",
+    "start:development": "cross-env NODE_ENV=development E2E=false node index",
+    "start:e2e": "cross-env NODE_ENV=development E2E=true CONTROLLER_ID=[ID] CONTROLLER_KEY=[KEY] MACHINE_ID=[ID] node index",
     "test": "mocha --colors --exit --timeout 60000 ./tests/index"
   },
   "repository": {
