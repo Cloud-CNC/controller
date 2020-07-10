@@ -2,6 +2,7 @@
 ![status](https://img.shields.io/badge/status-under%20development-yellow)
 [![issues](https://img.shields.io/github/issues/Cloud-CNC/controller)](https://github.com/Cloud-CNC/core/issues)
 [![last commit](https://img.shields.io/github/last-commit/Cloud-CNC/controller)](https://github.com/Cloud-CNC/core/commits/master)
+[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2FCloud-CNC%2Fcontroller.svg?type=shield)](https://app.fossa.com/projects/git%2Bgithub.com%2FCloud-CNC%2Fcontroller?ref=badge_shield)
 
 This repository contains all files for running a controller. Controller(s) are typically ran on computers with close proximity to the CNC machines.
 
@@ -20,3 +21,6 @@ Name | Description
 --- | ---
 `start` | Run controller
 `test` | Run eslint on everything
+
+## License
+[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2FCloud-CNC%2Fcontroller.svg?type=large)](https://app.fossa.com/projects/git%2Bgithub.com%2FCloud-CNC%2Fcontroller?ref=badge_large)
