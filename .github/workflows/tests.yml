@@ -111,4 +111,4 @@ jobs:
       #Run unit + E2E tests
       - name: Run Tests
         working-directory: ./frontend
-        run: sudo npm run coverage
+        run: ls && cat package.json && sudo npm run coverage
