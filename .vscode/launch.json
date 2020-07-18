@@ -47,7 +47,13 @@
       "internalConsoleOptions": "openOnSessionStart",
       "skipFiles": [
         "<node_internals>/**"
-      ]
+      ],
+      "env": {
+        "NODE_ENV": "development",
+        "E2E": "false",
+        "LOG": "console"
+      },
+      "outputCapture": "std"
     }
   ]
 }
