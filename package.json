@@ -14,7 +14,7 @@
     "ws": "^7.3.1"
   },
   "devDependencies": {
-    "@serialport/binding-abstract": "^9.0.0",
+    "@serialport/binding-abstract": "^9.0.1",
     "@serialport/binding-mock": "^8.0.6",
     "chai": "^4.2.0",
     "eslint": "^6.8.0",
