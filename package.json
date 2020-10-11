@@ -24,6 +24,7 @@
   },
   "scripts": {
     "coverage": "nyc --reporter=lcov npm test",
+    "lint": "eslint .",
     "start": "cross-env NODE_ENV=production E2E=false LOG=file node index",
     "start:development": "cross-env NODE_ENV=development E2E=false LOG=console node index",
     "start:e2e": "cross-env NODE_ENV=development E2E=true LOG=silent CONTROLLER_ID=[ID] CONTROLLER_KEY=[KEY] MACHINE_ID=[ID] node index",

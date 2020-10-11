@@ -8,21 +8,19 @@ jobs:
       matrix:
         node: [13, 14]
     steps:
-      - uses: actions/checkout@master
-      - uses: actions/setup-node@master
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v1
         with:
           node-version: ${{ matrix.node }}
-      - uses: stefanoeb/eslint-action@master
-        name: ESLint
       - name: Cleanup
         run: sudo rm -rf node_modules
       - name: Install Modules
         run: sudo npm ci
-      - name: Create Directories
-        run: sudo mkdir /data/db -p
+      - name: ESLint
+        run: npm run lint
       - name: Generate Key
         run: cd config && openssl rand -out key.txt -base64 512
-      - uses: paambaati/codeclimate-action@v2.6.0
+      - uses: paambaati/codeclimate-action@v2.7.4
         name: Run Tests
         env:
           CC_TEST_REPORTER_ID: ${{ secrets.CODE_CLIMATE_REPORTER_ID }}
@@ -46,7 +44,7 @@ jobs:
 
       #Setup the frontend
       - name: Clone frontend
-        uses: actions/checkout@v2.1.0
+        uses: actions/checkout@v2
         with:
           ref: ${{ github.ref }}
           repository: 'cloud-cnc/frontend'
@@ -64,7 +62,7 @@ jobs:
 
       #Setup the controller
       - name: Clone controller
-        uses: actions/checkout@v2.1.0
+        uses: actions/checkout@v2
         with:
           ref: ${{ github.ref }}
           repository: 'cloud-cnc/controller'
@@ -81,11 +79,11 @@ jobs:
           ln -s ../../cert.cer ./
 
       #Setup the core
-      - name: Install MongoDB
-        run: sudo apt install -y mongodb
+      - name: Enable MongoDB
+        run: sudo systemctl start mongod
 
       - name: Clone core
-        uses: actions/checkout@v2.1.0
+        uses: actions/checkout@v2
         with:
           ref: ${{ github.ref }}
           repository: 'cloud-cnc/core'
