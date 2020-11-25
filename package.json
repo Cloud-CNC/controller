@@ -3,19 +3,32 @@
   "version": "0.5.0",
   "description": "Controller for Cloud CNC",
   "main": "index.js",
+  "private": true,
   "dependencies": {
-    "serialport": "^8.0.6",
-    "winston": "^3.2.1",
-    "winston-daily-rotate-file": "^4.4.1",
-    "ws": "^7.2.1"
+    "config": "^3.3.1",
+    "cross-env": "^7.0.2",
+    "serialport": "^8.0.8",
+    "syswide-cas": "^5.3.0",
+    "winston": "^3.3.3",
+    "winston-daily-rotate-file": "^4.5.0",
+    "ws": "^7.3.1"
   },
   "devDependencies": {
-    "eslint": "^6.8.0"
+    "@serialport/binding-abstract": "^9.0.1",
+    "@serialport/binding-mock": "^8.0.6",
+    "chai": "^4.2.0",
+    "eslint": "^6.8.0",
+    "mocha": "^7.2.0",
+    "node-ipc": "^9.1.1",
+    "nyc": "^15.1.0"
   },
   "scripts": {
-    "lab": "node lab.js",
-    "start": "node index.js",
-    "test": "eslint ."
+    "coverage": "nyc --reporter=lcov npm test",
+    "lint": "eslint .",
+    "start": "cross-env NODE_ENV=production E2E=false LOG=file node index",
+    "start:development": "cross-env NODE_ENV=development E2E=false LOG=console node index",
+    "start:e2e": "cross-env NODE_ENV=development E2E=true LOG=silent CONTROLLER_ID=[ID] CONTROLLER_KEY=[KEY] MACHINE_ID=[ID] node index",
+    "test": "cross-env NODE_ENV=development E2E=false LOG=silent mocha --colors --exit --timeout 60000 ./tests/index"
   },
   "repository": {
     "type": "git",
