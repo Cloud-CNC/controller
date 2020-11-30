@@ -1,6 +1,6 @@
 /**
- * @fileoverview Production Cloud CNC Controller Config
- * This config file uses sain defaults
+ * @fileoverview Unit Testing Cloud CNC Controller Config
+ * This config file does NOT use sain defaults
  */
 
 //Export
@@ -19,7 +19,7 @@ module.exports = {
       directory: './logs/',
 
       //Logging mode (file = log to file, console = log to console, silent = don't log)
-      mode: 'file'
+      mode: 'silent'
     },
 
     //Auto-reconnect settings
@@ -50,13 +50,13 @@ module.exports = {
   //Settings for connecting to the core
   core: {
     //TLS certificate (Used for trusting self signed certificates) (PEM encoded)
-    cert: '',
+    cert: './config/cert.cer',
 
     //Self signed (Trust self signed certificates installed on the core server)
-    selfSigned: false,
+    selfSigned: true,
 
     //Websocket URL of core server (With URI scheme)
-    url: ''
+    url: 'wss://127.0.0.1'
   },
 
   //List of machines this controller should control

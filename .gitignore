@@ -5,6 +5,8 @@
 config/*
 !config/default.js
 !config/development.js
+!config/e2e.js
+!config/unit.js
 
 # Logs
 logs

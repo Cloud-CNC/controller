@@ -7,80 +7,47 @@ const config = require('config');
 const fs = require('fs');
 const logger = require('./lib/logger');
 const serial = require('./lib/serial');
-const websocket = require('./lib/websocket');
+const socket = require('./lib/socket');
 
 //Serial controller
-let serialController;
-if (process.env.E2E == 'true')
-{
-  serialController = new serial([
-    {
-      _id: process.env.MACHINE_ID,
-      failsafe: 'M112\n',
-      path: 'test-machine',
-      baudRate: 0
-    }
-  ],
-    config.get('controller.serialDelay'),
-    config.get('controller.maximumSerialAttempts'),
-    logger);
-}
-else
-{
-  serialController = new serial(config.get('machines'),
-    config.get('controller.serialDelay'),
-    config.get('controller.maximumSerialAttempts'),
-    logger);
-}
+const serialController = new serial(
+  config.get('machines'),
+  config.get('controller.reconnect.serial.delay'),
+  config.get('controller.reconnect.serial.maximumAttempts'));
 
-//Websocket controller
-let websocketController;
-if (process.env.E2E == 'true')
-{
-  websocketController = new websocket(config.get('core.url'),
-    process.env.CONTROLLER_ID,
-    process.env.CONTROLLER_KEY,
-    config.get('controller.websocketDelay'),
-    config.get('controller.maximumWebsocketAttempts'),
-    logger);
-}
-else
-{
-  websocketController = new websocket(config.get('core.url'),
-    config.get('controller._id'),
-    fs.readFileSync(config.get('controller.key'), 'utf8'),
-    config.get('controller.websocketDelay'),
-    config.get('controller.maximumWebsocketAttempts'),
-    logger);
-}
+//Socket controller
+const socketController = new socket(
+  config.get('core.url'),
+  config.get('controller._id'),
+  fs.readFileSync(config.get('controller.key'), 'utf8'),
+  config.get('controller.reconnect.socket.delay'),
+  config.get('controller.reconnect.socket.maximumAttempts'),
+  config.get('machines'));
 
-//Command
-websocketController.on('command', (data, response) =>
+//Core to controller
+socketController.on('command', data =>
 {
   //Send
-  serialController.send(data.machine, data.command).then(res =>
-  {
-    //Response
-    response(res);
-  });
+  serialController.send(data.machine, data.payload);
 });
 
-//Execute
-websocketController.on('execute', (data, response) =>
+socketController.on('execute', data =>
 {
   //Add M28 + M29 (SD Card Commands)
   data.file = `M28\n${data.file}M29\n`;
 
   //Send
-  serialController.send(data.machine, data.file).then(res =>
-  {
-    //Response
-    response(/echo:Now fresh file/.test(res));
-  });
+  serialController.send(data.machine, data.payload);
 });
 
-//Core disconnect
-websocketController.on('disconnect', () =>
+//Controller to core
+serialController.on('data', data =>
+{
+  socketController.send(data._id, data.payload);
+});
+
+//Fail safe
+socketController.on('disconnect', () =>
 {
   if (config.controller.failsafe)
   {
@@ -91,9 +58,3 @@ websocketController.on('disconnect', () =>
     });
   }
 });
-
-//Machine disconnect
-/*serialController.on('disconnect', machine =>
-{
-
-});*/

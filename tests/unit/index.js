@@ -4,4 +4,4 @@
 
 //Tests
 describe('Serial', require('./serial'));
-describe('Websocket', require('./websocket'));
+describe('Socket', require('./socket'));

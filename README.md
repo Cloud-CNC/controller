@@ -19,15 +19,20 @@ View guides, documentation and more at [cloud-cnc.github.io](https://cloud-cnc.g
 3. Install dependencies via running `npm i`
 4. Modify the config file ([default.js](config/default.js)) to add the ID + key and to customize your controller
 5. Run `npm start` to start the controller
-6. If you need any additional help, feel free to ask in the Spectrum channel
+6. If you need any additional help, feel free to ask in the [Spectrum channel](https://spectrum.chat/cloud-cnc/controller)
 
 ## Development
 
 ### NPM Scripts
 Name | Description
 --- | ---
-`start` | Run controller
-`test` | Run eslint on everything
+`coverage` | Run all unit tests and generate coverage reports
+`lint` | Lint everything with ES Lint
+`start` | Start the controller in production mode
+`start:development` | Start the controller in development mode - uses [mock serialport bindings](https://serialport.io/docs/api-binding-mock), logs to console
+`start:e2e` | Start the controller in E2E testing mode - uses [IPC serialport bindings](./lib/ipcBinding.js), disables logging
+`start:unit` | Start the controller in unit testing mode - disables logging
+`test` | Run all unit tests
 
 ## License
 [![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2FCloud-CNC%2Fcontroller.svg?type=large)](https://app.fossa.com/projects/git%2Bgithub.com%2FCloud-CNC%2Fcontroller?ref=badge_large)

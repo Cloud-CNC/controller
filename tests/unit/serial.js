@@ -54,7 +54,7 @@ module.exports = () =>
     {
       expect(res).to.be.eql({
         _id: '5e152b0e67ea760af01b9fd5',
-        data: payload
+        payload
       });
 
       done();

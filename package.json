@@ -8,10 +8,10 @@
     "config": "^3.3.1",
     "cross-env": "^7.0.2",
     "serialport": "^8.0.8",
-    "syswide-cas": "^5.3.0",
+    "socket.io": "^3.0.3",
+    "socket.io-client": "^3.0.3",
     "winston": "^3.3.3",
-    "winston-daily-rotate-file": "^4.5.0",
-    "ws": "^7.3.1"
+    "winston-daily-rotate-file": "^4.5.0"
   },
   "devDependencies": {
     "@serialport/binding-abstract": "^9.0.1",
@@ -25,10 +25,10 @@
   "scripts": {
     "coverage": "nyc --reporter=lcov npm test",
     "lint": "eslint .",
-    "start": "cross-env NODE_ENV=production E2E=false LOG=file node index",
-    "start:development": "cross-env NODE_ENV=development E2E=false LOG=console node index",
-    "start:e2e": "cross-env NODE_ENV=development E2E=true LOG=silent CONTROLLER_ID=[ID] CONTROLLER_KEY=[KEY] MACHINE_ID=[ID] node index",
-    "test": "cross-env NODE_ENV=development E2E=false LOG=silent mocha --colors --exit --timeout 60000 ./tests/index"
+    "start": "cross-env NODE_ENV=production node index",
+    "start:development": "cross-env NODE_ENV=development node index",
+    "start:e2e": "cross-env NODE_ENV=e2e node index",
+    "test": "cross-env NODE_ENV=unit mocha --colors --exit --timeout 60000 ./tests/index"
   },
   "repository": {
     "type": "git",
