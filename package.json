@@ -5,21 +5,21 @@
   "main": "index.js",
   "private": true,
   "dependencies": {
-    "config": "^3.3.1",
-    "cross-env": "^7.0.2",
-    "serialport": "^8.0.8",
-    "socket.io": "^3.0.3",
-    "socket.io-client": "^3.0.3",
-    "winston": "^3.3.3",
-    "winston-daily-rotate-file": "^4.5.0"
+    "config": "^3.3.7",
+    "cross-env": "^7.0.3",
+    "serialport": "^9.2.8",
+    "socket.io": "^4.4.1",
+    "socket.io-client": "^4.4.1",
+    "winston": "^3.5.0",
+    "winston-daily-rotate-file": "^4.6.0"
   },
   "devDependencies": {
-    "@serialport/binding-abstract": "^9.0.1",
-    "@serialport/binding-mock": "^8.0.6",
-    "chai": "^4.2.0",
-    "eslint": "^6.8.0",
-    "mocha": "^7.2.0",
-    "node-ipc": "^9.1.1",
+    "@serialport/binding-abstract": "^9.2.3",
+    "@serialport/binding-mock": "^9.2.4",
+    "chai": "^4.3.6",
+    "eslint": "^8.8.0",
+    "mocha": "^9.2.0",
+    "node-ipc": "^10.1.0",
     "nyc": "^15.1.0"
   },
   "scripts": {
